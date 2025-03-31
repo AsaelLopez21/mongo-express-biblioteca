@@ -29,5 +29,5 @@ sequelize
   .catch((error) => console.error("Error sincronizando:", error));
 
 app.listen(3000, () => {
-  console.log("Servidor http://localhost:3000/libros");
+  console.log("SERVIDOR: http://localhost:3000/");
 });
