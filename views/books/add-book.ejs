@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agregar Nuevo Libro</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <%- include('mensaje') %>
+    <div class="card-container">
+      <h1>Agregar Nuevo Libro</h1>
+      <form action="/libros/nuevo" method="POST">
+        <div>
+          <label for="titulo">Título:</label>
+          <input
+            class="form-control"
+            type="text"
+            id="titulo"
+            name="titulo"
+            required
+          />
+        </div>
+        <div>
+          <label for="autor">Autor:</label>
+          <input
+            class="form-control"
+            type="text"
+            id="autor"
+            name="autor"
+            required
+          />
+        </div>
+        <div>
+          <label for="anio">Año de Publicación:</label>
+          <input
+            class="form-control"
+            type="number"
+            id="anio"
+            name="anio_publicacion"
+            required
+          />
+        </div>
+        <div>
+          <label for="genero">Género:</label>
+          <input
+            class="form-control"
+            type="text"
+            id="genero"
+            name="genero"
+            required
+          />
+        </div>
+        <div class="button-group">
+          <button type="button" onclick="window.location.href='/libros'">
+            Cancelar
+          </button>
+          <button type="submit">Agregar Libro</button>
+        </div>
+      </form>
+    </div>
+    <script src="/static/scripts.js"></script>
+  </body>
+</html>

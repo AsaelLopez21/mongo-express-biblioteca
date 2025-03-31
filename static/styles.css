@@ -1,0 +1,212 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-color: #ffffff;
+  line-height: 1.6;
+}
+
+/* Contenedor principal */
+.card-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: rgb(255, 47, 47);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado */
+.card-container h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+}
+
+/* Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Campos de formulario */
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+label {
+  color: #34495e;
+  font-weight: 600;
+}
+
+input {
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Botones */
+button {
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* Botones específicos */
+button[type="button"] {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+button[type="submit"] {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-container {
+    margin: 20px;
+    padding: 20px;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  flex-direction: row !important; /* Anula el efecto de 'form' */
+}
+
+.button-group button {
+  flex: initial;
+  min-width: 120px;
+}
+
+/* Estilo para la tarjeta principal */
+.card-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f7e8ac;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el encabezado */
+.card-container h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilos del formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Estilos de las etiquetas */
+form label {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Estilos de los campos de entrada */
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #007bff;
+}
+
+/* Estilos para el grupo de botones */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Estilos del botón de cancelar */
+button[type="button"] {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+button[type="button"]:hover {
+  background-color: #e53935;
+}
+
+/* Estilos del botón de actualizar */
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #388e3c;
+}
+
+/* Estilo para el botón de eliminar */
+/* Estilo para el botón de eliminar */
+form button[type="submit"].btn-eliminar {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+form button[type="submit"].btn-eliminar:hover {
+  background-color: darkred;
+}
+

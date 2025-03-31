@@ -1,0 +1,137 @@
+<header>
+  <div style="margin: 6px; text-align: center">
+    <h1
+      style="
+        color: aliceblue;
+        background-color: #7e4b27;
+        display: inline-block;
+        padding: 0 5px;
+      "
+    >
+      Lista de Libros
+    </h1>
+  </div>
+
+  <a
+    href="/libros/nuevo"
+    style="
+      float: right;
+      padding: 8px 16px;
+      background-color: #ea861a;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 9px;
+    "
+  >
+    + Nuevo Libro
+  </a>
+</header>
+<main>
+  <section>
+    <table style="width: 100%; border-collapse: collapse; text-align: left; border-radius: 80px;">
+      <colgroup>
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 20%" />
+        <col style="width: 20%" />
+        <col style="width: 10%" />
+      </colgroup>
+      <thead>
+        <tr style="background-color: #99cba6; color: #ffffff">
+          <th style="border: 1px solid #ea861a; padding: 8px">Título</th>
+          <th style="border: 1px solid #ea861a; padding: 8px">Autor</th>
+          <th style="border: 1px solid #ea861a; padding: 8px">
+            Año de Publicación
+          </th>
+          <th style="border: 1px solid #ea861a; padding: 8px">Género</th>
+          <th style="border: 1px solid #ea861a; padding: 8px">Ver</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (!libro || !Array.isArray(libro)) { %>
+        <tr>
+          <td
+            colspan="5"
+            style="text-align: center; padding: 20px; background-color: #f8f9fa"
+          >
+            No hay libros disponibles en esta página.
+          </td>
+        </tr>
+        <% } else { %> <% libro.forEach(lib => { %>
+        <tr style="border: 1px solid #000000">
+          <td style="border: 1px solid #ea861a; padding: 8px;background-color: 	#f7e8ac;">
+            <%= lib.titulo %>
+          </td>
+          <td style="border: 1px solid #ea861a; padding: 8px; background-color: 	#f7e8ac;"><%= lib.autor %></td>
+          <td style="border: 1px solid #ea861a; padding: 8px; background-color: 	#f7e8ac;">
+            <%= lib.anio_publicacion %>
+          </td>
+          <td style="border: 1px solid #ea861a; padding: 8px; background-color: 	#f7e8ac;">
+            <%= lib.genero %>
+          </td>
+          <td style="border: 1px solid #ea861a; padding: 8px; background-color: 	#f7e8ac;">
+            <a
+              href="/libros/<%= lib.id_libro %>/editar"
+              style="text-decoration: none; color: #007bff"
+            >
+              Editar |
+            </a>
+            <a
+              href="/libros/<%= lib.id_libro %>/eliminar"
+              style="text-decoration: none; color: #ff0022"
+            >
+              Eliminar
+            </a>
+          </td>
+        </tr>
+        <% }); %> <% } %>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Paginación -->
+  <div style="margin-top: 20px; text-align: center">
+    <% if (hasPreviousPage) { %>
+    <a
+      href="/libros?page=<%= currentPage - 1 %>"
+      style="
+        margin-right: 10px;
+        padding: 5px 10px;
+        background-color: #ea861a;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+      "
+    >
+      Anterior
+    </a>
+    <% } %> <% for (let page = 1; page <= totalPages; page++) { %>
+    <a
+      href="/libros?page=<%= page %>"
+      style="margin: 0 5px; padding: 5px 10px; 
+           background-color: <%= currentPage === page ? '#f0f0f0' : '#f7e8ac' %>; 
+           color: <%= currentPage === page ? 'black' : '#ea861a' %>; 
+           text-decoration: none; border-radius: 3px"
+    >
+      <%= page %>
+    </a>
+    <% } %> <% if (hasNextPage) { %>
+    <a
+      href="/libros?page=<%= currentPage + 1 %>"
+      style="
+        margin-left: 10px;
+        padding: 5px 10px;
+        background-color: #ea861a;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+      "
+    >
+      Siguiente
+    </a>
+    <% } %>
+  </div>
+</main>

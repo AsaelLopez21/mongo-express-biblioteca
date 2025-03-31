@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ver Libro</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <%- include('mensaje') %>
+    <!-- Incluye el mensaje de alerta, si lo hay -->
+    <div class="card-container">
+      <h1>Ver Libro</h1>
+      <div>
+        <label for="titulo">Título:</label>
+        <div class="form-control"><%= libro.titulo %></div>
+      </div>
+
+      <div>
+        <label for="autor">Autor:</label>
+        <div class="form-control"><%= libro.autor %></div>
+      </div>
+
+      <div>
+        <label for="anio">Año de Publicación:</label>
+        <div class="form-control"><%= libro.anio_publicacion %></div>
+      </div>
+
+      <div>
+        <label for="genero">Género:</label>
+        <div class="form-control"><%= libro.genero %></div>
+      </div>
+
+      <div class="button-group mt-5">
+        <button
+          type="button"
+          style="
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+          "
+          onmouseover="this.style.backgroundColor='#388e3c'"
+          onmouseout="this.style.backgroundColor='#4caf50'"
+          onclick="window.location.href='/libros'"
+        >
+          Cancelar
+        </button>
+        <form action="/libros/<%= libro.id_libro %>/eliminar?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE" />
+          <button
+            type="button"
+            style="
+              background-color: red;
+              color: white;
+              border: none;
+              padding: 10px 20px;
+              font-size: 16px;
+              cursor: pointer;
+              border-radius: 5px;
+            "
+            onclick="confirmarEliminacion(this.form)"
+          >
+            Eliminar
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function confirmarEliminacion(form) {
+        const confirmar = confirm(
+          "¿Estás seguro de que deseas eliminar este libro?"
+        );
+        if (confirmar) {
+          form.submit(); 
+        }
+      }
+    </script>
+  </body>
+</html>
