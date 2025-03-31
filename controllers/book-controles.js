@@ -1,3 +1,4 @@
+const { response } = require("express");
 const libroService = require("../services/book-service");
 
 const libroController = {
@@ -103,6 +104,11 @@ const libroController = {
       });
     }
   },
+  getHome:async(req,res)=>{
+    return res.render("books/home", {
+      title: "Pagina Principal biblioteca",
+    });
+  }
 };
 
 module.exports = libroController;

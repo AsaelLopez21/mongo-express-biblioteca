@@ -84,6 +84,8 @@ router.delete("/libros/:id/eliminar", async (req, res) => {
   await libroController.eliminarLibro(req, res);
 });
 
+router.get("/",(req,res)=>libroController.getHome(req,res));
+
 router.use((req, res) => {
   res.status(404).render("Error404", {
     title: "Error",

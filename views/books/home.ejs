@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="p-3 mb-4 text-center" style="background-color: #7e4b27; border-radius: 5px;">
+            <h1 class="text-center mb-0" style="color: aliceblue;"><%= title %></h1>
+        </div>
+        <div class="card mx-auto" style="width: 18rem;background-color: #f2ab23; color: aliceblue;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Lista de Libros</h5>
+                <p class="card-text">En el siguiente enlace encontrará una base de datos para agregar, editar y eliminar libros</p>
+                <div class="d-flex justify-content-center">
+                    <a href="#" class="btn" style="background-color: #7e4b27;color: aliceblue;" onclick="window.location.href='/libros'">Lista de Libros</a>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
