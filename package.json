@@ -18,8 +18,9 @@
     "sequelize": "^6.37.6"
   },
   "scripts": {
-    "test": "run dev",
-    "dev": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
