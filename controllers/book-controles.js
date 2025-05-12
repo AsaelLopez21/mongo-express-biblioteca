@@ -41,7 +41,7 @@ const libroController = {
       console.error("Error en getLibros:", error);
       res.status(500).render("Error404", {
         title: "Error 500",
-        error: "Error interno del servidor",
+        error: "Error",
       });
     }
   },
@@ -58,7 +58,7 @@ const libroController = {
       if (!titulo || !autor || !anio_publicacion || !genero) {
         return res.render("books/add-book", {
           title: "Agregar Nuevo Libro",
-          mensaje: "Todos los campos son obligatorios",
+          mensaje: "Faltan campos",
           tipoMensaje: "error",
         });
       }
@@ -70,7 +70,7 @@ const libroController = {
       ) {
         return res.render("books/add-book", {
           title: "Agregar Nuevo Libro",
-          mensaje: "Año de publicación inválido",
+          mensaje: "Año de publicación invalido",
           tipoMensaje: "error",
         });
       }

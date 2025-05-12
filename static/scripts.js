@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("form");
 
-  if (!form) return; // Evita errores si el script se carga en otra página sin formulario
+  if (!form) return;
 
   form.addEventListener("submit", function (event) {
     let titulo = document.getElementById("titulo").value.trim();
@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let anio = document.getElementById("anio").value.trim();
     let genero = document.getElementById("genero").value.trim();
 
-    // Expresión regular para solo letras y espacios
+    //!solo letras y espacios
     let soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/;
 
-    // Verificar que los campos no estén vacíos
+    //! Verificar campos
     if (!titulo || !autor || !anio || !genero) {
       alert("Todos los campos son obligatorios.");
       event.preventDefault();
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Validación de año
+    // !Validacion de año
     let anioNumerico = parseInt(anio, 10);
     let anioActual = new Date().getFullYear();
 

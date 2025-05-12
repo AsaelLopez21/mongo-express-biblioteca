@@ -18,7 +18,7 @@
     "sequelize": "^6.37.6"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "run dev",
     "dev": "nodemon app.js",
     "test": "echo \"No tests specified\" && exit 0"
   },

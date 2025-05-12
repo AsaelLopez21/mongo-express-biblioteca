@@ -3,24 +3,24 @@ const router = express.Router();
 const libroController = require("../controllers/book-controles");
 const libroService = require("../services/book-service");
 
-// Mostrar todos los libros con paginación
+//! Mostrar los libros con paginacion
 router.get("/libros/", (req, res) => libroController.getLibros(req, res));
 
-// Mostrar formulario para agregar libro
+//! Mostrar formulario agregar
 router.get("/libros/nuevo", (req, res) =>
   libroController.mostrarFormulario(req, res)
 );
 
-// Procesar formulario de nuevo libro
+//! Procesar formulario de nuevo libro
 router.post("/libros/nuevo", async (req, res) => {
   try {
     await libroController.guardarLibro(req, res);
   } catch (error) {
-    res.status(500).send({ error: "Ocurrió un error" });
+    res.send("ocurrio error",error);
   }
 });
 
-// Mostrar formulario para editar un libro
+//!para editar un libro
 router.get("/libros/:id/editar", async (req, res) => {
   const { id } = req.params;
   try {
@@ -36,11 +36,11 @@ router.get("/libros/:id/editar", async (req, res) => {
     });
   } catch (err) {
     console.error("error", err);
-    return res.status(500).send({ error: "Error al cargar el libro" });
+    return res.send("Error al cargar el libro",error);
   }
 });
 
-// Procesar edición del libro
+//!editar libro
 router.put("/libros/:id/editar", async (req, res) => {
   const { id } = req.params;
   const { titulo, autor, anio_publicacion, genero } = req.body;
@@ -61,11 +61,10 @@ router.put("/libros/:id/editar", async (req, res) => {
     return res.redirect("/libros");
   } catch (err) {
     console.error("Error al actualizar el libro:", err);
-    return res.status(500).send("Error al actualizar el libro");
+    return res.send("Error al actualizar el libro");
   }
 });
 
-// Confirmación de eliminación
 router.get("/libros/:id/eliminar", async (req, res) => {
   const { id } = req.params;
 
@@ -82,19 +81,17 @@ router.get("/libros/:id/eliminar", async (req, res) => {
     });
   } catch (err) {
     console.error("error", err);
-    return res.status(500).send({ error: "Error al cargar el libro" });
+    return res.send(error, "Error al cargar el libro" );
   }
 });
 
-// Procesar eliminación del libro
 router.delete("/libros/:id/eliminar", async (req, res) => {
   await libroController.eliminarLibro(req, res);
 });
 
-// Página principal
 router.get("/", (req, res) => libroController.getHome(req, res));
 
-// Manejo de rutas no encontradas
+//!si no encuentra
 router.use((req, res) => {
   res.status(404).render("Error404", {
     title: "Error",

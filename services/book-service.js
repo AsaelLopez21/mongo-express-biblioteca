@@ -1,13 +1,17 @@
 const Libro = require("../models/libros");
 
 const libroService = {
-  // Obtener libros con paginación
+  //!obtener libros
   getDataLibros: async (pagina = 1, limite = 10, titulo, anio_publicacion) => {
     try {
+      //!manejar paginacion
       const salto = (pagina - 1) * limite;
 
+      //!crear filtro
       const filtro = {};
-      if (titulo) filtro.titulo = { $regex: titulo, $options: "i" };
+
+      //!buscar titulo y año
+      if (titulo) filtro.titulo = titulo;
       if (anio_publicacion) filtro.anio_publicacion = anio_publicacion;
 
       const libros = await Libro.find(filtro).skip(salto).limit(limite);
@@ -23,7 +27,7 @@ const libroService = {
     }
   },
 
-  // Crear un nuevo libro
+  //! Crear un nuevo libro
   createBook: async (bookData) => {
     try {
       const newBook = await Libro.create(bookData);
@@ -33,7 +37,7 @@ const libroService = {
     }
   },
 
-  // Obtener un libro por su _id
+  //!obtener por ID
   getBookById: async (id) => {
     try {
       const libro = await Libro.findById(id);
@@ -43,7 +47,7 @@ const libroService = {
     }
   },
 
-  // Actualizar un libro por su _id
+  //!actualizar por id
   updateBook: async (id, bookData) => {
     try {
       const libro = await Libro.findById(id);
@@ -58,7 +62,6 @@ const libroService = {
     }
   },
 
-  // Eliminar un libro por su _id
   deleteBook: async (id) => {
     try {
       const libro = await Libro.findById(id);
