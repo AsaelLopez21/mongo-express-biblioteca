@@ -1,14 +1,13 @@
-const { Sequelize } = require("sequelize");
+const mongoose = require('mongoose')
+require ('dotenv').config()
 
-const sequelize = new Sequelize("biblioteca", "root", "nova", {
-  host: "localhost",
-  dialect: "mysql",
-  port: "3306",
-});
+const connectDb = async () =>{
+  try{
+    await mongoose.connect(process.env.URL)
+    console.log('Conectado a mongo');
+  }catch(error){
+    console.log('ERROR'+error);
+  }
+}
 
-sequelize
-  .authenticate()
-  .then(() => console.log("conectado"))
-  .catch((error) => console.log({ 'error':error }));
-
-module.exports = sequelize;
+module.exports = connectDb

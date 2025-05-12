@@ -1,70 +1,92 @@
-const Libros = require("../models/libros");
+const Libro = require("../models/libros");
 
 const libroService = {
-  getDataLibros: async (actualPage = 1, booksPerPage = 10) => {
+  // Obtener libros con paginación
+  getDataLibros: async (pagina = 1, limite = 10, titulo, anio_publicacion) => {
     try {
-      const pos = (actualPage - 1) * booksPerPage;
+      const salto = (pagina - 1) * limite;
 
-      const { count, rows } = await Libros.findAndCountAll({
-        offset: pos,
-        limit: booksPerPage,
-        order: [["id_libro", "ASC"]],
-      });
+      const filtro = {};
+      if (titulo) filtro.titulo = { $regex: titulo, $options: "i" };
+      if (anio_publicacion) filtro.anio_publicacion = anio_publicacion;
+
+      const libros = await Libro.find(filtro).skip(salto).limit(limite);
+      const total = await Libro.countDocuments(filtro);
 
       return {
-        data: rows,
-        totalItems: count,
-        currentPage: actualPage,
-        totalPages: Math.ceil(count / booksPerPage),
-        hasPreviousPage: actualPage > 1,
-        hasNextPage: actualPage < Math.ceil(count / booksPerPage),
+        data: libros,
+        currentPage: pagina,
+        totalPages: Math.ceil(total / limite),
       };
     } catch (error) {
       return { msg: error.message, data: [] };
     }
   },
+
+  // Crear un nuevo libro
   createBook: async (bookData) => {
-    // console.log("hola soy el servicio");
     try {
-      const newBook = await Libros.create(bookData);
+      const newBook = await Libro.create(bookData);
       return newBook;
     } catch (error) {
-      // console.log("hola soy el error en el servicio");
-
       throw error;
     }
   },
-  getBookById: async (id_libro) => {
-    // console.log("id libro recivo", id_libro);
+
+  // Obtener un libro por su _id
+  getBookById: async (id) => {
     try {
-      const libro = await Libros.findByPk(id_libro);
+      const libro = await Libro.findById(id);
       return libro;
     } catch (err) {
       throw err;
     }
   },
-  updateBook: async (id_libro, bookData) => {
+
+  // Actualizar un libro por su _id
+  updateBook: async (id, bookData) => {
     try {
-      const libro = await Libros.findByPk(id_libro);
+      const libro = await Libro.findById(id);
       if (!libro) {
         throw new Error("Libro no encontrado");
       }
 
-      await libro.update(bookData);
+      await libro.updateOne(bookData);
       return libro;
     } catch (error) {
       throw error;
     }
   },
-  deleteBook: async (id_libro) => {
+
+  // Eliminar un libro por su _id
+  deleteBook: async (id) => {
     try {
-      const libro = await Libros.findByPk(id_libro);
+      const libro = await Libro.findById(id);
       if (!libro) {
         throw new Error("Libro no encontrado");
       }
 
-      await libro.destroy();
+      await libro.deleteOne();
       return { message: "Libro eliminado correctamente" };
+    } catch (error) {
+      throw error;
+    }
+  },
+  //!obtener por año
+  getBooksByAnio: async (anio_publicacion) => {
+    try {
+      const libros = await Libro.find({ anio_publicacion });
+      return libros;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  //!obtener por titulo
+  getBooksByTitulo: async (titulo) => {
+    try {
+      const libros = await Libro.find({ titulo: new RegExp(titulo, "i") }); // Búsqueda insensible a mayúsculas/minúsculas
+      return libros;
     } catch (error) {
       throw error;
     }

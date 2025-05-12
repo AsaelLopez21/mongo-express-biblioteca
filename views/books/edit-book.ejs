@@ -9,9 +9,9 @@
   <body>
     <div class="card-container">
       <h1>Editar Libro</h1>
-      <form action="/libros/<%= libro.id_libro %>/editar?_method=PUT" method="POST">
+      <form action="/libros/<%= libro._id %>/editar?_method=PUT" method="POST">
         <input type="hidden" name="_method" value="PUT" />
-        
+
         <div>
           <label for="titulo">Título:</label>
           <input
@@ -23,7 +23,7 @@
             required
           />
         </div>
-        
+
         <div>
           <label for="autor">Autor:</label>
           <input
@@ -61,12 +61,14 @@
         </div>
 
         <div class="button-group">
-          <button type="button" onclick="window.location.href='/libros'">Cancelar</button>
+          <button type="button" onclick="window.location.href='/libros'">
+            Cancelar
+          </button>
           <button type="submit">Actualizar Libro</button>
         </div>
       </form>
     </div>
 
-    <script src="/static/scripts.js"></script> <!-- El mismo script que usas para agregar libro -->
+    <script src="/static/scripts.js"></script>
   </body>
 </html>

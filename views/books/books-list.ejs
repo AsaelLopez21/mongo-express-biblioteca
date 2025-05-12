@@ -46,10 +46,93 @@
   >
     Inicio
   </a>
+
+  <a
+    href="/libros"
+    style="
+      float: right;
+      padding: 8px 16px;
+      background-color: #99cba6;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 9px;
+      margin-right: 9px;
+    "
+  >
+    Ver Todos
+  </a>
 </header>
+
 <main>
   <section>
-    <table style="width: 100%; border-collapse: collapse; text-align: left; border-radius: 80px;">
+    <div style="text-align: center; margin-bottom: 20px">
+      <!-- Formulario para buscar por título -->
+      <form
+        action="/libros"
+        method="GET"
+        style="display: inline-block; margin-right: 10px"
+      >
+        <input
+          type="text"
+          name="titulo"
+          placeholder="Buscar por título"
+          style="
+            padding: 8px;
+            margin-right: 10px;
+            border-radius: 3px;
+            border: 1px solid #ea861a;
+            width: 200px;
+          "
+        />
+        <button
+          type="submit"
+          style="
+            padding: 8px 16px;
+            background-color: #ea861a;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+          "
+        >
+          Buscar Título
+        </button>
+      </form>
+
+      <!-- Formulario para buscar por año -->
+      <form action="/libros" method="GET" style="display: inline-block">
+        <input
+          type="number"
+          name="anio_publicacion"
+          placeholder="Buscar por año"
+          style="
+            padding: 8px;
+            margin-right: 10px;
+            border-radius: 3px;
+            border: 1px solid #ea861a;
+            width: 200px;
+          "
+        />
+        <button
+          type="submit"
+          style="
+            padding: 8px 16px;
+            background-color: #ea861a;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+          "
+        >
+          Buscar Año
+        </button>
+      </form>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; text-align: left">
       <colgroup>
         <col style="width: 25%" />
         <col style="width: 25%" />
@@ -69,43 +152,73 @@
         </tr>
       </thead>
       <tbody>
-        <% if (!libro || !Array.isArray(libro)) { %>
+        <% if (!libro || !Array.isArray(libro) || libro.length === 0) { %>
         <tr>
           <td
             colspan="5"
             style="text-align: center; padding: 20px; background-color: #f8f9fa"
           >
-            No hay libros disponibles en esta página.
+            No hay libros disponibles con esa búsqueda.
           </td>
         </tr>
         <% } else { %> <% libro.forEach(lib => { %>
-        <tr style="border: 1px solid #000000">
-          <td style="border: 1px solid #ea861a; padding: 8px;background-color: 	#f7e8ac;">
+        <tr>
+          <td
+            style="
+              border: 1px solid #ea861a;
+              padding: 8px;
+              background-color: #f7e8ac;
+            "
+          >
             <%= lib.titulo %>
           </td>
-          <td style="border: 1px solid #ea861a; padding: 8px; background-color: 	#f7e8ac;"><%= lib.autor %></td>
-          <td style="border: 1px solid #ea861a; padding: 8px; background-color: 	#f7e8ac;">
+          <td
+            style="
+              border: 1px solid #ea861a;
+              padding: 8px;
+              background-color: #f7e8ac;
+            "
+          >
+            <%= lib.autor %>
+          </td>
+          <td
+            style="
+              border: 1px solid #ea861a;
+              padding: 8px;
+              background-color: #f7e8ac;
+            "
+          >
             <%= lib.anio_publicacion %>
           </td>
-          <td style="border: 1px solid #ea861a; padding: 8px; background-color: 	#f7e8ac;">
+          <td
+            style="
+              border: 1px solid #ea861a;
+              padding: 8px;
+              background-color: #f7e8ac;
+            "
+          >
             <%= lib.genero %>
           </td>
-          <td style="border: 1px solid #ea861a; padding: 8px; background-color: 	#f7e8ac;">
+          <td
+            style="
+              border: 1px solid #ea861a;
+              padding: 8px;
+              background-color: #f7e8ac;
+            "
+          >
             <a
-              href="/libros/<%= lib.id_libro %>/editar"
+              href="/libros/<%= lib._id %>/editar"
               style="text-decoration: none; color: #007bff"
+              >Editar |</a
             >
-              Editar |
-            </a>
             <a
-              href="/libros/<%= lib.id_libro %>/eliminar"
+              href="/libros/<%= lib._id %>/eliminar"
               style="text-decoration: none; color: #ff0022"
+              >Eliminar</a
             >
-              Eliminar
-            </a>
           </td>
         </tr>
-        <% }); %> <% } %>
+        <% }) %> <% } %>
       </tbody>
     </table>
   </section>
@@ -129,10 +242,10 @@
     <% } %> <% for (let page = 1; page <= totalPages; page++) { %>
     <a
       href="/libros?page=<%= page %>"
-      style="margin: 0 5px; padding: 5px 10px; 
-           background-color: <%= currentPage === page ? '#f0f0f0' : '#f7e8ac' %>; 
-           color: <%= currentPage === page ? 'black' : '#ea861a' %>; 
-           text-decoration: none; border-radius: 3px"
+      style="margin: 0 5px; padding: 5px 10px;
+      background-color: <%= currentPage === page ? '#f0f0f0' : '#f7e8ac' %>;
+      color: <%= currentPage === page ? 'black' : '#ea861a' %>;
+      text-decoration: none; border-radius: 3px;"
     >
       <%= page %>
     </a>

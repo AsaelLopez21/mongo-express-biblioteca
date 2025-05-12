@@ -1,60 +1,24 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../database/database");
+const mongoose = require("mongoose");
 
-class libros extends Model {}
-
-libros.init(
+const libroSchema = new mongoose.Schema(
   {
-    id_libro: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
     titulo: {
-      type: DataTypes.TEXT(100),
-      allowNull: false,
-      validate: {
-        notNull: { msg: "El título es obligatorio" },
-        notEmpty: { msg: "El título no puede estar vacío" },
-      },
+      type: String,
+      required: true,
     },
     autor: {
-      type: DataTypes.TEXT(100),
-      allowNull: false,
-      validate: {
-        notNull: { msg: "El autor es obligatorio" },
-        notEmpty: { msg: "El autor no puede estar vacío" },
-      },
+      type: String,
+      required: true,
     },
     anio_publicacion: {
-      type: DataTypes.INTEGER(4),
-      allowNull: false,
-      validate: {
-        notNull: { msg: "El año de publicación es obligatorio" },
-        isInt: { msg: "El año debe ser un número entero" },
-        min: { args: -2600, msg: "El año debe ser mayor a -2600" },
-        max: {
-          args: new Date().getFullYear(),
-          msg: "El año no puede ser futuro",
-        },
-      },
+      type: Number,
     },
     genero: {
-      type: DataTypes.TEXT(50),
-      allowNull: false,
-      validate: {
-        notNull: { msg: "El género es obligatorio" },
-        notEmpty: { msg: "El género no puede estar vacío" },
-      },
+      type: String,
     },
   },
-  {
-    sequelize,
-    modelName: "libros",
-    tableName: "libro",
-    timestamps: false,
-  }
+  { timestamps: true }
 );
 
-module.exports = libros;
+const Libro = mongoose.model("Libro", libroSchema);
+module.exports = Libro;
